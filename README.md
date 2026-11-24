@@ -16,5 +16,5 @@
 
 <!-- sección con la evidencia de la práctica -->
 ## Evidencia
-<!-- dónde están las capturas -->
-Ver capturas de `migrate` y de las tablas en Aiven en la carpeta /evidencias.
+
+Se evidencio que la aplicacion esta corriendo de manera local, la base de datos esta siendo hosteada por medio de Aiven y manejada/manipulada por medio de DBeaver.
