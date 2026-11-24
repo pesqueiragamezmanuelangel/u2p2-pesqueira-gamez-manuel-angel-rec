@@ -17,3 +17,19 @@ def inicio(request):
     }
     # render: junta el template "core/inicio.html" con el contexto y devuelve el HTML final
     return render(request, 'core/inicio.html', contexto)
+
+
+# nueva función de vista, además de "inicio" que ya tenías
+def servicios(request):
+    # lista_servicios: datos de ejemplo en Python — todavía no vienen de MySQL
+    lista_servicios = [
+        # cada servicio es un diccionario con su nombre y su precio
+        {'nombre': 'Tutorías de programación', 'precio': 150},
+        # segundo servicio de ejemplo
+        {'nombre': 'Diseño de logotipos', 'precio': 300},
+        # tercer servicio de ejemplo
+        {'nombre': 'Repostería por encargo', 'precio': 120},
+    # cierre de la lista
+    ]
+    # se la pasamos a la plantilla con la clave 'servicios'
+    return render(request, 'core/servicios.html', {'servicios': lista_servicios})
