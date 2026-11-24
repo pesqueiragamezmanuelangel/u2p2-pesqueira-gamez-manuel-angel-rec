@@ -37,13 +37,23 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# INSTALLED_APPS: lista de apps que forman tu proyecto; Django solo "ve" las que están aquí
 INSTALLED_APPS = [
+    # admin: el panel /admin
     'django.contrib.admin',
+    # auth: usuarios, contraseñas y permisos
     'django.contrib.auth',
+    # contenttypes: registro interno de los modelos (lo usan admin y auth)
     'django.contrib.contenttypes',
+    # sessions: recuerda quién inició sesión entre una página y otra
     'django.contrib.sessions',
+    # messages: mensajes de una sola vez (ej. "guardado con éxito")
     'django.contrib.messages',
+    # staticfiles: maneja los archivos CSS, JS e imágenes
     'django.contrib.staticfiles',
+    # 'core': tu app nueva, agregada al final de la lista
+    'core',
+# cierre de la lista INSTALLED_APPS
 ]
 
 MIDDLEWARE = [
