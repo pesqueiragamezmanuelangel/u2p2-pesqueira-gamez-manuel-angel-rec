@@ -11,6 +11,13 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
 from pathlib import Path
+# pymysql: el conector que instalaste en el paso 02
+import pymysql
+# Hace que Django use pymysql como si fuera el driver oficial de MySQL para Python
+pymysql.install_as_MySQLdb()
+
+# config: función de python-decouple que lee valores del archivo .env
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -72,11 +79,27 @@ WSGI_APPLICATION = 'miproyecto.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
+# (más abajo en el archivo, reemplaza el DATABASES que trae Django por defecto)
 DATABASES = {
+    # 'default': la conexión principal; Django puede tener varias, esta es la que usa siempre
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # ENGINE: qué motor de base de datos usar — mysql en vez del sqlite3 por defecto
+        'ENGINE': 'django.db.backends.mysql',
+        # NAME: nombre de la base de datos, leído de la variable DB_NAME del .env
+        'NAME': config('DB_NAME'),
+        # USER: usuario de conexión, leído de DB_USER
+        'USER': config('DB_USER'),
+        # PASSWORD: contraseña de conexión, leída de DB_PASSWORD
+        'PASSWORD': config('DB_PASSWORD'),
+        # HOST: servidor donde vive la base de datos, leído de DB_HOST
+        'HOST': config('DB_HOST'),
+        # PORT: puerto de conexión; default='3306' se usa solo si DB_PORT no está en el .env
+        'PORT': config('DB_PORT', default='3306'),
+        # OPTIONS: Aiven exige que la conexión venga cifrada (SSL)
+        'OPTIONS': {'ssl': {'ssl-mode': 'REQUIRED'}},
+    # cierre del diccionario de configuración de la conexión
     }
+# cierre del diccionario DATABASES
 }
 
 
